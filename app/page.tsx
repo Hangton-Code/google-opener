@@ -26,7 +26,7 @@ const googleApps: GoogleApp[] = [
   },
   {
     name: "Google Slides",
-    url: "https://slides.google.com/u/",
+    url: "https://docs.google.com/presentation/u/",
     icon: "/slides.svg",
   },
   {
