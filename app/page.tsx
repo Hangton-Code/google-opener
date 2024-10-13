@@ -20,6 +20,11 @@ interface GoogleApp {
 const googleApps: GoogleApp[] = [
   { name: "Gmail", url: "https://mail.google.com/mail/u/", icon: "/mail.svg" },
   {
+    name: "Google Drive",
+    url: "https://drive.google.com/drive/u/",
+    icon: "/drive.svg",
+  },
+  {
     name: "Google Docs",
     url: "https://docs.google.com/document/u/",
     icon: "/docs.svg",
