@@ -1,5 +1,6 @@
 "use client";
 
+import { ModeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { BoltIcon } from "lucide-react";
 import Link from "next/link";
@@ -104,6 +105,9 @@ const Home: React.FC = () => {
           <BoltIcon className="h-4 w-4" />
         </Link>
       </Button>
+      <div className="absolute right-4 bottom-4">
+        <ModeToggle />
+      </div>
     </div>
   );
 };

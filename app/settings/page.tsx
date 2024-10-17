@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, BadgeMinusIcon } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface Account {
   name: string;
@@ -48,6 +48,35 @@ const Settings: React.FC = () => {
     const updatedAccounts = accounts.filter((_, i) => i !== index);
     setAccounts(updatedAccounts);
   };
+
+  const exportData = () => {
+    const dataStr = JSON.stringify(accounts);
+    const dataUri =
+      "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
+    const exportFileDefaultName = "accounts.json";
+
+    const linkElement = document.createElement("a");
+    linkElement.setAttribute("href", dataUri);
+    linkElement.setAttribute("download", exportFileDefaultName);
+    linkElement.click();
+  };
+
+  const importData = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const fileReader = new FileReader();
+    const files = event.target.files;
+
+    if (files && files.length > 0) {
+      fileReader.onload = (e) => {
+        if (e.target?.result) {
+          const importedAccounts = JSON.parse(e.target.result as string);
+          setAccounts(importedAccounts);
+        }
+      };
+      fileReader.readAsText(files[0]);
+    }
+  };
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className="w-screen h-screen relative flex flex-col justify-center items-center gap-8">
@@ -112,9 +141,28 @@ const Settings: React.FC = () => {
         ))}
       </div>
 
-      <Button variant={"secondary"} onClick={addAccount}>
-        Add Account
-      </Button>
+      <div className="flex flex-col space-y-4 items-center">
+        <Button variant={"secondary"} onClick={addAccount}>
+          Add Account
+        </Button>
+
+        {/* import and export data */}
+        <input
+          type="file"
+          accept=".json"
+          onChange={importData}
+          className="hidden"
+          ref={fileInputRef}
+        />
+        <div className="grid grid-cols-2 gap-3">
+          <Button onClick={() => fileInputRef.current?.click()} size={"sm"}>
+            Import Data
+          </Button>
+          <Button onClick={exportData} size={"sm"}>
+            Export Data
+          </Button>
+        </div>
+      </div>
 
       <Button
         variant="outline"
