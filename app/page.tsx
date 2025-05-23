@@ -82,7 +82,7 @@ const Home: React.FC = () => {
               <h2>{account.name}</h2>
             )}
             <div className="flex flex-col gap-4">
-              <div className="grid grid-cols-6 gap-8">
+              <div className="grid grid-cols-7 gap-8">
                 {googleApps.map((app) => (
                   <Button
                     key={app.name}
