@@ -41,6 +41,11 @@ const googleApps: GoogleApp[] = [
     icon: "/sheets.svg",
   },
   {
+    name: "Google Forms",
+    url: "https://docs.google.com/forms/",
+    icon: "/forms.svg",
+  },
+  {
     name: "Google Classroom",
     url: "https://classroom.google.com/u/",
     icon: "/classroom.svg",
